@@ -8,18 +8,10 @@ class JoinGroup extends React.Component {
 
     render() {
         return e('button', {
-                onClick: () => this.joinGroup(),
+                onClick: () => setAppState({screen: "select"}),
                 id: "joinGroup"
             },
             this.state.buttonText
         );
-    }
-
-    joinGroup() {
-        $("#app").animateCss('fadeOut faster', () => {
-            setAppState({screen: "select"});
-            $("#spinner").show();
-            $("#spinner").animateCss("fadeIn faster");
-        })
     }
 }

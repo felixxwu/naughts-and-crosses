@@ -49,10 +49,9 @@ class CreateGroup extends React.Component {
             }
         })
         .done(response => {
-            $("#app").animateCss("fadeOut faster", () => {
-                setAppState({
-                    screen: "select"
-                });
+            setAppState({
+                screen: "game",
+                gameID: response.results[response.results.length - 1].id
             });
         })
         .fail(error => console.error(error));

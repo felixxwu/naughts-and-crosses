@@ -9,7 +9,11 @@ class App extends React.Component {
             screen: "start",
             gameID: null
         };
-        setAppState = state => this.setState(state);
+        setAppState = state => {
+            $("#app").animateCss("fadeOut faster", () => {
+                this.setState(state);
+            });
+        };
     }
 
     render() {

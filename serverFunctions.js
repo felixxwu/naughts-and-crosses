@@ -39,11 +39,12 @@ selectCols = async (args) => {
 }
 
 newGroup = async (args) => {
-    return await sqlQuery(`insert into groups (xloc, yloc) values (${args.x}, ${args.y})`);
+    await sqlQuery(`insert into groups (xloc, yloc) values (${args.x}, ${args.y})`);
+    return await sqlQuery("select id from groups order by id");
 }
 
 getGroups = async (args) => {
-    return await sqlQuery("select * from groups");
+    return await sqlQuery("select * from groups order by id");
 }
 
 deleteGroup = async (args) => {

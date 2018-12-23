@@ -9,13 +9,10 @@ class GroupListing extends React.Component {
         return e("div", {
                 className: "groupListing",
                 onClick: () => {
-                    $("#app").animateCss("fadeOut faster", () => {
-                        setAppState({
-                            screen: "game",
-                            gameID: this.props.group.id
-                        });
+                    setAppState({
+                        screen: "game",
+                        gameID: this.props.group.id
                     });
-                    
                 }
             },
             e("div", {className: "left"}, "Game ID: " + this.props.group.id),

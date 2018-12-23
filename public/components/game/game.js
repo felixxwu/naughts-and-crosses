@@ -3,22 +3,25 @@ class Game extends React.Component {
         super(props);
         this.state = {
             boardSize: 3,
-            tiles: []
+            tiles: [],
+            mySymbol: null
         }
     }
 
     render() {
         document.body.style.setProperty("--boardsize", this.state.boardSize);
         return e("div", null,
+
             "Game ID: " + this.props.gameID,
+
             e("div", {className: "board"}, this.generateTiles()),
+
             e("button", {
                 onClick: () => {
-                    $("#app").animateCss("fadeOut faster",() => {
-                        setAppState({screen: "start"});
-                    });
+                    setAppState({screen: "select"});
                 }
-            }, "quit"),
+            }, "back"),
+
             e("button", {
                 onClick: () => {
                     $.ajax({
@@ -29,15 +32,16 @@ class Game extends React.Component {
                         }
                     })
                     .done(() => {
-                        $("#app").animateCss("fadeOut faster", () => {
-                            setAppState({screen: "start"});
-                        });
+                        setAppState({screen: "start"});
                     })
                     .fail(error => console.error(error));
                 }
             }, "delete game")
+
         );
     }
+
+    
 
     generateTiles() {
         var tiles = [];
