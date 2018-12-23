@@ -41,3 +41,7 @@ selectCols = async (args) => {
 newGroup = async (args) => {
     return await sqlQuery(`insert into groups (xloc, yloc) values (${args.x}, ${args.y})`);
 }
+
+getGroups = async (args) => {
+    return await sqlQuery("select * from groups");
+}

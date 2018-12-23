@@ -9,11 +9,12 @@
     <link rel="stylesheet" href="/css/spinner.css">
     <link rel="stylesheet" href="/css/grid3x3.css">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="/css/button.css">
     <link rel="stylesheet" href="/css/animate.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 </head>
-<body class="grid3x3">
-    
+<body class="grid3x3 fullscreen">
+
     <center>
         <div id="spinner" class="sk-cube-grid">
             <div class="sk-cube sk-cube1"></div>
@@ -30,28 +31,25 @@
         <div id="app"></div>
     </center>
 
-    <script>
-        window.onload = () => {
-            $("#spinner").animateCss("fadeOut faster", function() {
-                $("#spinner").hide();
-                $("#app").animateCss("fadeIn faster");
-                ReactDOM.render(e(App), document.querySelector('#app'));
-            });
-        }
-    </script>
 
+    <!-- JQUERY & FUNCTIONS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/js/ajax.js"></script>
+    <script src="/js/onload.js"></script>
     <script src="/js/animatecssExtension.js"></script>
+    <script src="/js/location.js"></script>
 
+    <!-- REACT -->
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="/components/app.js"></script>
     <script src="/components/button.js"></script>
     <script src="/components/buttons.js"></script>
     <script src="/components/createGroup.js"></script>
     <script src="/components/joinGroup.js"></script>
-    <script src="/components/app.js"></script>
+    <script src="/components/selectGroup.js"></script>
+    <script src="/components/groupListing.js"></script>
 
+    <!-- PRELOAD IMAGES HERE -->
     <hidden>
         <!-- <img src="/images/test.png" alt="test"> -->
     </hidden>

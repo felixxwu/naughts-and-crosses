@@ -1,22 +1,18 @@
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     margin: 0;
-    width: 100vw;
-    height: 100vh;
     --black: darkslategrey;
+    --hover: rgb(230, 230, 230);
+    overflow-x: hidden;
 }
 
-button {
-    display: block;
-    border: 1px solid var(--black);
-    padding: 15px;
-    margin: 20px;
-    background-color: transparent;
-    border-radius: 0px;
-    text-transform: uppercase;
-    color: var(--black);
-    font-weight: bold;
-    cursor: pointer;
+.fullscreen {
+    width: 100vw;
+    height: 100vh;
+}
+
+hidden {
+    display: none;
 }
 
 .createjoin {
@@ -27,6 +23,20 @@ button {
     border-top: 1px solid var(--black);
 }
 
-hidden {
-    display: none;
+.groupListing {
+    display: grid;
+    grid-template-areas: "left right";
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid var(--hover);
+    cursor: pointer;
+}
+
+.groupListing:hover {
+    background-color: var(--hover);
+}
+
+.groupListing > .left { grid-area: left; }
+.groupListing > .right { grid-area: right; }
+.groupListing > * {
+    margin: 20px;
 }

@@ -1,17 +1,16 @@
 <script>
-
     function loadFiles(
-        styles,  // array of css urls to load
+        styles, // array of css urls to load
         scripts, // array of js urls to load
-        images,  // array of image urls to load
-        step,    // (status) => {} called every time a file is loaded with info about status
-                 // see status = () => {} for the contents of (status)
-        finish   // () => {} called when all files are loaded (can be undefined)
+        images, // array of image urls to load
+        step, // (status) => {} called every time a file is loaded with info about status
+        // see status = () => {} for the contents of (status)
+        finish // () => {} called when all files are loaded (can be undefined)
     ) {
         let loadedScripts = []; // populated as scripts are loaded
-        let loadedStyles = [];  // populated as styles are loaded
-        let loadedImages = [];  // populated as images are loaded
-        
+        let loadedStyles = []; // populated as styles are loaded
+        let loadedImages = []; // populated as images are loaded
+
         // load css styles
         for (let i = 0; i < styles.length; i++) {
             const url = styles[i];
@@ -27,7 +26,7 @@
 
                 // call step() with the status (status is null if finish() should be called)
                 step(status());
-            }
+            };
             // add the link element to the end of the document head
             document.head.appendChild(style);
         }
@@ -46,7 +45,7 @@
 
                 // call step() with the status (status is null if finish() should be called)
                 step(status());
-            }
+            };
             // add the script element to the end of the document body
             document.body.appendChild(script);
         }
@@ -56,12 +55,12 @@
         hiddenImages.style.display = "none";
         for (let i = 0; i < images.length; i++) {
             const url = images[i];
-            
+
             let image = document.createElement("img");
             image.onload = () => {
                 loadedImages.push(url);
                 step(status());
-            }
+            };
             image.src = url;
             hiddenImages.appendChild(image);
         }
@@ -85,13 +84,12 @@
                     total: scripts
                 },
                 styles: {
-                    loaded: loadedStyles, 
+                    loaded: loadedStyles,
                     total: styles
                 },
                 loaded: loaded,
                 total: total
             };
-        }
+        };
     }
-
 </script>

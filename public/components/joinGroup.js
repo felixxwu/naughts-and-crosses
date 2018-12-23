@@ -16,8 +16,10 @@ class JoinGroup extends React.Component {
     }
 
     joinGroup() {
-        $("#joinGroup").animateCss('bounce', function() {
-            alert("done");
+        $("#app").animateCss('fadeOut faster', () => {
+            this.props.setState({screen: "select"});
+            $("#spinner").show();
+            $("#spinner").animateCss("fadeIn faster");
         })
     }
 }
