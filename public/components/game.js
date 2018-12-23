@@ -18,7 +18,24 @@ class Game extends React.Component {
                         setAppState({screen: "start"});
                     });
                 }
-            }, "quit")
+            }, "quit"),
+            e("button", {
+                onClick: () => {
+                    $.ajax({
+                        url: "serverFunctions",
+                        data: {
+                            func: "deleteGroup",
+                            id: this.props.gameID
+                        }
+                    })
+                    .done(() => {
+                        $("#app").animateCss("fadeOut faster", () => {
+                            setAppState({screen: "start"});
+                        });
+                    })
+                    .fail(error => console.error(error));
+                }
+            }, "delete game")
         );
     }
 

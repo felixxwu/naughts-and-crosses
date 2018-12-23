@@ -15,17 +15,7 @@ class GroupListing extends React.Component {
                             gameID: this.props.group.id
                         });
                     });
-                    // $.ajax({
-                    //     url: "serverFunctions",
-                    //     data: {
-                    //         func: "deleteGroup",
-                    //         id: this.props.group.id
-                    //     }
-                    // })
-                    // .done(() => {
-                    //     this.props.setState({groups: null});
-                    // })
-                    // .fail(error => console.error(error));
+                    
                 }
             },
             e("div", {className: "left"}, "Game ID: " + this.props.group.id),
