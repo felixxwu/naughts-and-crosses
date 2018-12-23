@@ -10,6 +10,9 @@ class SelectGroup extends React.Component {
 
     render() {
 
+        $("#spinner").show();
+        $("#spinner").animateCss("fadeIn faster");
+
         // ask for location, restart render when location is answered (success or error)
         if (this.state.location == null && this.state.locationError == null) {
             this.askLocation();
@@ -27,10 +30,26 @@ class SelectGroup extends React.Component {
         for (let i = 0; i < this.state.groups.length; i++) {
             const group = this.state.groups[i];
             children.push(
-                e(GroupListing, {key: i, group: group, myLocation: this.state.location})
+                e(GroupListing, {
+                    key: i, 
+                    group: group, 
+                    myLocation: this.state.location,
+                    setState: state => this.setState(state)
+                })
             );
         }
-        return e("div", null, this.state.locationError, children);
+        return e("div", null,
+            this.state.locationError,
+            children,
+            e("button", {
+                onClick: () => {
+                    $("#app").animateCss("fadeOut faster", () => {
+                        $("#app").animateCss("fadeIn faster");
+                        this.props.setState({screen: "start"})
+                    });
+                }
+            }, "back")
+        );
     }
     
     // restarts render()

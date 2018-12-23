@@ -45,3 +45,7 @@ newGroup = async (args) => {
 getGroups = async (args) => {
     return await sqlQuery("select * from groups");
 }
+
+deleteGroup = async (args) => {
+    return await sqlQuery(`delete from groups where id = ${args.id}`);
+}

@@ -16,7 +16,7 @@ class App extends React.Component {
                     e(JoinGroup, {setState: state => this.setState(state)})
                 );
             case "select":
-                return e(SelectGroup);
+                return e(SelectGroup, {setState: state => this.setState(state)});
             case "game":
                 return e(Buttons);
         }

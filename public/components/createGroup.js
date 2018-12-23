@@ -48,7 +48,7 @@ class CreateGroup extends React.Component {
         .done(response => {
             $("#app").animateCss("fadeOut faster", () => {
                 $("#app").animateCss("fadeIn faster");
-                this.props.setState({screen: "game"});
+                this.props.setState({screen: "select"});
             });
         })
         .fail(error => console.error(error));

@@ -9,7 +9,17 @@ class GroupListing extends React.Component {
         return e("div", {
                 className: "groupListing",
                 onClick: () => {
-                    alert();
+                    $.ajax({
+                        url: "serverFunctions",
+                        data: {
+                            func: "deleteGroup",
+                            id: this.props.group.id
+                        }
+                    })
+                    .done(() => {
+                        this.props.setState({groups: null});
+                    })
+                    .fail(error => console.error(error));
                 }
             },
             e("div", {className: "left"}, "Group ID: " + this.props.group.id),
