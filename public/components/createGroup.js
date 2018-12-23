@@ -9,7 +9,7 @@ class CreateGroup extends React.Component {
 
     render() {
         if (this.state.locationError != null) {
-            return e("div", {className: "animated pulse"},
+            return e("div", {className: "animated flash"},
                 e("p", null, this.state.locationError),
                 e("button", {
                     onClick: () => {
@@ -25,13 +25,16 @@ class CreateGroup extends React.Component {
     }
 
     handleClick() {
-        this.setState({buttonText: "creating group..."});
         getLocation(
             position => {   // success
+                this.setState({buttonText: "creating group..."});
                 this.createGroup(position.coords);
             },
             error => {      // error
-                this.setState({locationError: lookUpLocationError(error)});
+                $("#app").animateCss("fadeOut faster", () => {
+                    $("#app").animateCss("fadeIn faster");
+                    this.setState({locationError: lookUpLocationError(error)});
+                });
             }
         );
     }
