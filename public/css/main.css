@@ -1,8 +1,10 @@
 body {
     font-family: "Montserrat", sans-serif;
     margin: 0;
-    --black: darkslategrey;
-    --hover: rgb(230, 230, 230);
+    --bg: rgb(245, 245, 245);
+    --black: rgb(57, 85, 85);
+    --hover: rgb(225, 225, 225);
+    background-color: var(--bg);
     overflow-x: hidden;
 }
 

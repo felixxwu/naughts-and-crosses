@@ -1,24 +1,29 @@
 const e = React.createElement;
 
+var setAppState;
+
 class App extends React.Component {
     constructor() {
         super();
         this.state = {
             screen: "start",
+            gameID: null
         };
+        setAppState = state => this.setState(state);
     }
 
     render() {
+        $("#app").animateCss("fadeIn faster");
         switch (this.state.screen) {
             case "start":
                 return e("div", {className: "createjoin"},
-                    e(CreateGroup, {setState: state => this.setState(state)}),
-                    e(JoinGroup, {setState: state => this.setState(state)})
+                    e(CreateGroup),
+                    e(JoinGroup)
                 );
             case "select":
-                return e(SelectGroup, {setState: state => this.setState(state)});
+                return e(SelectGroup);
             case "game":
-                return e(Buttons);
+                return e(Game, {gameID: this.state.gameID});
         }
     }
 

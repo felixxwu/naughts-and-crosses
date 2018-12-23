@@ -2,7 +2,7 @@ class JoinGroup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            buttonText: "join group"
+            buttonText: "join game"
         }
     }
 
@@ -17,7 +17,7 @@ class JoinGroup extends React.Component {
 
     joinGroup() {
         $("#app").animateCss('fadeOut faster', () => {
-            this.props.setState({screen: "select"});
+            setAppState({screen: "select"});
             $("#spinner").show();
             $("#spinner").animateCss("fadeIn faster");
         })

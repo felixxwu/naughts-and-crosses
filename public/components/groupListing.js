@@ -9,20 +9,26 @@ class GroupListing extends React.Component {
         return e("div", {
                 className: "groupListing",
                 onClick: () => {
-                    $.ajax({
-                        url: "serverFunctions",
-                        data: {
-                            func: "deleteGroup",
-                            id: this.props.group.id
-                        }
-                    })
-                    .done(() => {
-                        this.props.setState({groups: null});
-                    })
-                    .fail(error => console.error(error));
+                    $("#app").animateCss("fadeOut faster", () => {
+                        setAppState({
+                            screen: "game",
+                            gameID: this.props.group.id
+                        });
+                    });
+                    // $.ajax({
+                    //     url: "serverFunctions",
+                    //     data: {
+                    //         func: "deleteGroup",
+                    //         id: this.props.group.id
+                    //     }
+                    // })
+                    // .done(() => {
+                    //     this.props.setState({groups: null});
+                    // })
+                    // .fail(error => console.error(error));
                 }
             },
-            e("div", {className: "left"}, "Group ID: " + this.props.group.id),
+            e("div", {className: "left"}, "Game ID: " + this.props.group.id),
             e("div", {className: "right"}, distanceToGroup)
         );
     }

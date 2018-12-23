@@ -44,8 +44,7 @@ class SelectGroup extends React.Component {
             e("button", {
                 onClick: () => {
                     $("#app").animateCss("fadeOut faster", () => {
-                        $("#app").animateCss("fadeIn faster");
-                        this.props.setState({screen: "start"})
+                        setAppState({screen: "start"})
                     });
                 }
             }, "back")

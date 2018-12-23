@@ -2,7 +2,7 @@ class CreateGroup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            buttonText: "create group",
+            buttonText: "create game",
             locationError: null
         }
     }
@@ -15,7 +15,7 @@ class CreateGroup extends React.Component {
                     onClick: () => {
                         this.createGroup({latitude: 0, longitude: 0});
                     }
-                }, "create group without location")
+                }, "create game without location")
             );
         }
         
@@ -27,7 +27,7 @@ class CreateGroup extends React.Component {
     handleClick() {
         getLocation(
             position => {   // success
-                this.setState({buttonText: "creating group..."});
+                this.setState({buttonText: "creating game..."});
                 this.createGroup(position.coords);
             },
             error => {      // error
@@ -50,8 +50,9 @@ class CreateGroup extends React.Component {
         })
         .done(response => {
             $("#app").animateCss("fadeOut faster", () => {
-                $("#app").animateCss("fadeIn faster");
-                this.props.setState({screen: "select"});
+                setAppState({
+                    screen: "select"
+                });
             });
         })
         .fail(error => console.error(error));
