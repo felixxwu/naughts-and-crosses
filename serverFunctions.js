@@ -1,3 +1,6 @@
+// calls to this must be func: function, arg1: ..., arg2: ...
+
+
 const { Pool } = require('pg');
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
@@ -17,7 +20,7 @@ module.exports = {
         try {
             client = await pool.connect()
 
-            let func = new Function('args', `return ${req.query.func}(args)`);
+            let func = new Function('args', `return ${ req.query.func }(args)`);
             let results = await func(req.query);
 
             res.send(results);
@@ -32,7 +35,7 @@ module.exports = {
 }
 
 selectCols = async (args) => {
-    return await sqlQuery(`select ${args.columns} from groups`);
+    return await sqlQuery(`select ${ args.columns } from groups`);
 }
 
 newGroup = async (args) => {
