@@ -17,6 +17,11 @@ hidden {
     display: none;
 }
 
+#loading {
+    position: absolute;
+    pointer-events: none;
+}
+
 .createjoin {
     background-color: transparent;
     display: block;

@@ -27,6 +27,7 @@ class CreateGroup extends React.Component {
     handleClick() {
         getLocation(
             position => {   // success
+                $("#spinner").show();
                 this.setState({buttonText: "creating game..."});
                 this.createGroup(position.coords);
             },
@@ -53,6 +54,7 @@ class CreateGroup extends React.Component {
                 screen: "game",
                 gameID: response.results[response.results.length - 1].id
             });
+            saveHistory("start");
         })
         .fail(error => console.error(error));
     }

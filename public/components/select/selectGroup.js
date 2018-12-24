@@ -11,7 +11,6 @@ class SelectGroup extends React.Component {
     render() {
 
         $("#spinner").show();
-        $("#spinner").animateCss("fadeIn faster");
 
         // ask for location, restart render when location is answered (success or error)
         if (this.state.location == null && this.state.locationError == null) {
@@ -24,6 +23,8 @@ class SelectGroup extends React.Component {
             this.getGroups();
             return null;
         }
+
+        $("#spinner").hide();
         
         // have location (maybe error) and groups ready
         var children = [];
@@ -70,11 +71,9 @@ class SelectGroup extends React.Component {
             }
         })
         .done(response => {
-            $("#spinner").animateCss("fadeOut faster", () => {
-                this.setState({groups: response.results});
-                $("#spinner").hide();
-                $("#app").animateCss("fadeIn faster");
-            });
+            this.setState({groups: response.results});
+            $("#spinner").hide();
+            $("#app").animateCss("fadeIn faster");
         })
         .fail(error => console.error(error));
     }

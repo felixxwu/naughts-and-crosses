@@ -9,6 +9,8 @@ class Game extends React.Component {
     }
 
     render() {
+        $("#spinner").hide();
+        
         document.body.style.setProperty("--boardsize", this.state.boardSize);
         return e("div", null,
 
@@ -18,12 +20,14 @@ class Game extends React.Component {
 
             e("button", {
                 onClick: () => {
-                    setAppState({screen: "select"});
+                    setAppState({screen: "start"});
+                    pastPages.pop();
                 }
             }, "back"),
 
             e("button", {
                 onClick: () => {
+                    $("#spinner").show();
                     $.ajax({
                         url: "serverFunctions",
                         data: {
@@ -33,6 +37,7 @@ class Game extends React.Component {
                     })
                     .done(() => {
                         setAppState({screen: "start"});
+                        pastPages.pop();
                     })
                     .fail(error => console.error(error));
                 }

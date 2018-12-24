@@ -7,8 +7,14 @@ class JoinGroup extends React.Component {
     }
 
     render() {
+        $("#spinner").hide();
+        
         return e('button', {
-                onClick: () => setAppState({screen: "select"}),
+                onClick: () => {
+                    $("#spinner").show();
+                    setAppState({screen: "select"});
+                    saveHistory("start");
+                },
                 id: "joinGroup"
             },
             this.state.buttonText
