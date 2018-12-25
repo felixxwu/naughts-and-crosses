@@ -5,12 +5,12 @@ window.addEventListener("hashchange", function(e) {
     // because the current hash is the last element in the hashstack
     // if it wasnt, we know that the user changed it
     if (location.hash != "#" + appState().screen) {
-        setAppState({screen: parents[appState().screen]});
+        parents[appState().screen]();
     }
 });
 
 var parents = {
-    start: "home",
-    select: "start",
-    game: "select"
+    start: () => {},
+    select: () => {setAppState({screen: "start"})},
+    game: () => {setAppState({screen: "start"})}
 }
