@@ -13,7 +13,6 @@ class GroupListing extends React.Component {
                         screen: "game",
                         gameID: this.props.group.id
                     });
-                    saveHistory("select");
                 }
             },
             e("div", {className: "left"}, "Game ID: " + this.props.group.id),

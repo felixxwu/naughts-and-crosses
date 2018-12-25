@@ -3,8 +3,8 @@ class SelectGroup extends React.Component {
         super(props);
         this.state = {
             groups: null,
-            location: null,
-            locationError: null
+            location: null,     // this is set when the location is given
+            locationError: null // this is set if there was a problem getting the location
         }
     }
 
@@ -39,8 +39,17 @@ class SelectGroup extends React.Component {
                 })
             );
         }
+
+        // if there are no groups, then show a message and create group button
+        if (children.length == 0) {
+            children = [
+                e("div", {key: "text"}, "There are no games, create one?"),
+                e(CreateGroup, {key: "button"})
+            ];
+        }
+        
         return e("div", null,
-            this.state.locationError,
+            e("b", null, this.state.locationError),
             children,
             e("button", {
                 onClick: () => {

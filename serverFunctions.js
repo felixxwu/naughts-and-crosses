@@ -35,12 +35,16 @@ module.exports = {
 }
 
 selectCols = async (args) => {
-    return await sqlQuery(`select ${ args.columns } from groups`);
+    return await sqlQuery(`select ${ args.columns } from groups order by id`);
 }
 
 newGroup = async (args) => {
-    await sqlQuery(`insert into groups (xloc, yloc) values (${args.x}, ${args.y})`);
+    await sqlQuery(`insert into groups (xloc, yloc, board) values (${args.x}, ${args.y}, ${args.board})`);
     return await sqlQuery("select id from groups order by id");
+}
+
+getGroup = async (args) => {
+    return await sqlQuery(`select * from groups where id = ${args.id}`);
 }
 
 getGroups = async (args) => {

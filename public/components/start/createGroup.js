@@ -3,7 +3,8 @@ class CreateGroup extends React.Component {
         super(props);
         this.state = {
             buttonText: "create game",
-            locationError: null
+            locationError: null,
+            boardSize: {x: 4, y: 3}
         }
     }
 
@@ -46,7 +47,9 @@ class CreateGroup extends React.Component {
             data: {
                 func: "newGroup",
                 x: coords.latitude,
-                y: coords.longitude
+                y: coords.longitude,
+                players: 0,
+                board: this.emptyBoardStringForSQL()
             }
         })
         .done(response => {
@@ -54,8 +57,19 @@ class CreateGroup extends React.Component {
                 screen: "game",
                 gameID: response.results[response.results.length - 1].id
             });
-            saveHistory("start");
         })
         .fail(error => console.error(error));
+    }
+
+    emptyBoardStringForSQL() {
+        var tiles = [];
+        for (let y = 0; y < this.state.boardSize.y; y++) {
+            let row = [];
+            for (let x = 0; x < this.state.boardSize.x; x++) {
+                row.push(null);
+            }
+            tiles.push(row);
+        }
+        return "'" + JSON.stringify(tiles) + "'";
     }
 }

@@ -1,17 +1,28 @@
+body {
+    /* both values are overwritten in js */
+    --boardRows: 3;
+    --boardCols: 3;
+}
 
 .board {
     margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(var(--boardsize), 1fr);
-    grid-template-rows: repeat(var(--boardsize), 1fr);
+    grid-template-columns: repeat(var(--boardCols), 1fr);
+    grid-template-rows: repeat(var(--boardRows), 1fr);
 }
 
 .tile {
     width: 70px;
     height: 70px;
     border: 1px solid var(--black);
+    font-weight: bold;
+    font-size: xx-large;
 }
 
 .tile:hover {
     background-color: var(--hover);
+}
+
+.clickable {
+    cursor: pointer;
 }

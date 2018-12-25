@@ -1,5 +1,6 @@
 const e = React.createElement;
 
+var appState;
 var setAppState;
 
 class App extends React.Component {
@@ -9,6 +10,7 @@ class App extends React.Component {
             screen: "start",
             gameID: null
         };
+        appState = () => {return this.state};
         setAppState = state => {
             $("#app").animateCss("fadeOut faster", () => {
                 this.setState(state);
@@ -17,6 +19,7 @@ class App extends React.Component {
     }
 
     render() {
+        location.hash = this.state.screen;
         $("#app").animateCss("fadeIn faster");
         switch (this.state.screen) {
             case "start":

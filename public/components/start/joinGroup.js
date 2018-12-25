@@ -13,7 +13,6 @@ class JoinGroup extends React.Component {
                 onClick: () => {
                     $("#spinner").show();
                     setAppState({screen: "select"});
-                    saveHistory("start");
                 },
                 id: "joinGroup"
             },
