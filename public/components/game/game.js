@@ -21,8 +21,6 @@ class Game extends React.Component {
             this.setState({player: this.choosePlayer()});
         }
 
-        $("#spinner").hide();
-        
         this.pollServer();
         
         return e("div", null,
@@ -138,6 +136,7 @@ class Game extends React.Component {
                     disableClick: false
                 });
                 loop();
+                $("#spinner").hide();
             })
             .fail(error => console.error(error));
         };

@@ -23,8 +23,8 @@ class Tile extends React.Component {
     }
 
     handleClick() {
-        this.props.disableClick();
         $("#spinner").show();
+        this.props.disableClick();
         let board = this.getBoard();
         let pos = this.props.pos;
         board[pos.y][pos.x] = this.getPlayer();
