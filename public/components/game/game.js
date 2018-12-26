@@ -4,8 +4,8 @@ class Game extends React.Component {
         this.state = {
             player: null,
             board: null,
-            playerx: null,
-            playero: null
+            playerx: null,  // timestamp of last server poll
+            playero: null   // ^
         }
     }
 
@@ -15,14 +15,19 @@ class Game extends React.Component {
             return null;
         }
 
+        if (this.state.player == null) {
+            this.setState({player: this.choosePlayer()});
+        }
+
         $("#spinner").hide();
         
-        
-        console.log(this.state);
+        this.pollServer();
         
         return e("div", null,
 
             "Game ID: " + this.props.gameID,
+
+            e("div", null, "You are player: ", e("b", null, this.state.player)),
 
             e("div", {className: "board"}, this.gameTiles()),
 
@@ -49,13 +54,27 @@ class Game extends React.Component {
                     })
                     .fail(error => console.error(error));
                 }
-            }, "delete game")
+            }, "delete game"),
+
+            e("button", {
+                onClick: () => {
+                    let playerToSwitchTo = "x";
+                    if (this.state.player == "x") {
+                        playerToSwitchTo = "o";
+                    }
+                    this.setState({player: playerToSwitchTo});
+                }
+            }, "switch player")
 
         );
     }
 
-    selectPlayer() {
-        
+    choosePlayer() {
+        if (this.state.playerx < this.state.playero) {
+            return "x";
+        } else {
+            return "o";
+        }
     }
 
     getGame(id) {
@@ -90,6 +109,7 @@ class Game extends React.Component {
                         key: key++,
                         pos: {x: x, y: y},
                         gameState: this.state,
+                        gameID: this.props.gameID,
                         setTiles: tiles => this.setState({tiles: tiles})
                     })
                 );
@@ -109,6 +129,29 @@ class Game extends React.Component {
         document.body.style.setProperty("--boardRows", size.y);
 
         return size;
+    }
+
+    pollServer() {
+        loopAction = () => {
+            $.ajax({
+                url: "serverFunctions",
+                data: {
+                    func: "playerPoll",
+                    player: this.state.player,
+                    id: this.props.gameID
+                }
+            })
+            .done(response => {
+                let gameState = response.results[0];
+                this.setState({
+                    board: gameState.board,
+                    playerx: gameState.playerx,
+                    playero: gameState.playero
+                });
+                loop();
+            })
+            .fail(error => console.error(error));
+        };
     }
 
 }

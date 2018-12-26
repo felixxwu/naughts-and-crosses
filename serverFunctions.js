@@ -39,7 +39,8 @@ selectCols = async (args) => {
 }
 
 newGroup = async (args) => {
-    await sqlQuery(`insert into groups (xloc, yloc, board) values (${args.x}, ${args.y}, ${args.board})`);
+    await sqlQuery(`insert into groups (xloc, yloc, board) 
+                    values (${args.x}, ${args.y}, ${args.board})`);
     return await sqlQuery("select id from groups order by id");
 }
 
@@ -53,4 +54,15 @@ getGroups = async (args) => {
 
 deleteGroup = async (args) => {
     return await sqlQuery(`delete from groups where id = ${args.id}`);
+}
+
+playerPoll = async (args) => {
+    await sqlQuery(`update groups set player${args.player} = ${(new Date()).getTime()} 
+                    where id = ${args.id}`);
+    return await getGroup(args);
+}
+
+setBoard = async (args) => {
+    return await sqlQuery(`update groups set board = '${args.board}' 
+                            where id = ${args.id}`);
 }

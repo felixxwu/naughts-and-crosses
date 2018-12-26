@@ -16,7 +16,7 @@ body {
     height: 70px;
     border: 1px solid var(--black);
     font-weight: bold;
-    font-size: xx-large;
+    font-size: -webkit-xxx-large;
 }
 
 .tile:hover {
