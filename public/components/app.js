@@ -24,6 +24,7 @@ class App extends React.Component {
         switch (this.state.screen) {
             case "start":
                 return e("div", {className: "createjoin"},
+                    e("img", {src: "/images/logo.png", id: "logo"}),
                     e(CreateGroup),
                     e(JoinGroup)
                 );

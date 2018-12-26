@@ -39,8 +39,12 @@ selectCols = async (args) => {
 }
 
 newGroup = async (args) => {
-    await sqlQuery(`insert into groups (xloc, yloc, board) 
-                    values (${args.x}, ${args.y}, ${args.board})`);
+    let turn = "x";
+    if (Math.random() < 0.5) {
+        turn = "o";
+    }
+    await sqlQuery(`insert into groups (xloc, yloc, board, turn, playerx, playero) 
+                    values (${args.x}, ${args.y}, ${args.board}, '${turn}', 0, 0)`);
     return await sqlQuery("select id from groups order by id");
 }
 
@@ -49,6 +53,10 @@ getGroup = async (args) => {
 }
 
 getGroups = async (args) => {
+    let cutoff = (new Date()).getTime() - 10000;
+    await sqlQuery(`delete from groups where 
+                    playerx < ${cutoff} and 
+                    playero < ${cutoff}`);
     return await sqlQuery("select * from groups order by id");
 }
 
@@ -63,6 +71,11 @@ playerPoll = async (args) => {
 }
 
 setBoard = async (args) => {
-    return await sqlQuery(`update groups set board = '${args.board}' 
+    let turn = await sqlQuery(`select turn from groups where id = ${args.id}`);
+    let switchedTurn = "x";
+    if (turn.results[0].turn == "x") {
+        switchedTurn = "o";
+    }
+    return await sqlQuery(`update groups set (board, turn) = ('${args.board}', '${switchedTurn}') 
                             where id = ${args.id}`);
 }

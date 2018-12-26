@@ -2,9 +2,9 @@ class CreateGroup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            buttonText: "create game",
             locationError: null,
-            boardSize: {x: 4, y: 3}
+            boardSize: {x: 3, y: 3},
+            showPicker: false
         }
     }
 
@@ -19,9 +19,23 @@ class CreateGroup extends React.Component {
                 }, "create game without location")
             );
         }
+
+        if (this.state.showPicker) {
+            return e(SizePicker, {
+                handleClick: () => this.handleClick(),
+                setValues: boardSize => this.setState({boardSize: boardSize})
+            });
+        }
         
-        return e('button', { onClick: () => this.handleClick() },
-            this.state.buttonText
+        return e('button', {
+            id: "createGameButton",
+            onClick: () => {
+                $("#createGameButton").animateCss("fadeOut faster",() => {
+                    this.setState({showPicker: true});
+                });
+            }
+        },
+            "create game"
         );
     }
 
@@ -29,7 +43,6 @@ class CreateGroup extends React.Component {
         getLocation(
             position => {   // success
                 $("#spinner").show();
-                this.setState({buttonText: "creating game..."});
                 this.createGroup(position.coords);
             },
             error => {      // error

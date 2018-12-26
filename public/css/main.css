@@ -22,12 +22,36 @@ hidden {
     pointer-events: none;
 }
 
+#logo {
+    width: 80px;
+    position: fixed;
+    top: 15%;
+    margin: auto;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.veryLarge {
+    font-size: 40px;
+}
+
 .createjoin {
     background-color: transparent;
     display: block;
     padding: 1px;
-    border-bottom: 1px solid var(--black);
-    border-top: 1px solid var(--black);
+    /* border-bottom: 1px solid var(--black);
+    border-top: 1px solid var(--black); */
+}
+
+.sizePicker {
+    background-color: transparent;
+    margin: 15px;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid;
+    width: 70px;
+    text-align: center;
+    font-size: 30px;
 }
 
 .groupListing {

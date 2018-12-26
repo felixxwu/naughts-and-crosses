@@ -5,7 +5,9 @@ class Game extends React.Component {
             player: null,
             board: null,
             playerx: null,  // timestamp of last server poll
-            playero: null   // ^
+            playero: null,  // ^
+            turn: null,
+            disableClick: false // temporarily disables tile click until new server poll
         }
     }
 
@@ -28,6 +30,8 @@ class Game extends React.Component {
             "Game ID: " + this.props.gameID,
 
             e("div", null, "You are player: ", e("b", null, this.state.player)),
+            
+            this.turnMessage(),
 
             e("div", {className: "board"}, this.gameTiles()),
 
@@ -36,35 +40,7 @@ class Game extends React.Component {
                     setAppState({screen: "start"});
                     pastPages.pop();
                 }
-            }, "back"),
-
-            e("button", {
-                onClick: () => {
-                    $("#spinner").show();
-                    $.ajax({
-                        url: "serverFunctions",
-                        data: {
-                            func: "deleteGroup",
-                            id: this.props.gameID
-                        }
-                    })
-                    .done(() => {
-                        setAppState({screen: "start"});
-                        pastPages.pop();
-                    })
-                    .fail(error => console.error(error));
-                }
-            }, "delete game"),
-
-            e("button", {
-                onClick: () => {
-                    let playerToSwitchTo = "x";
-                    if (this.state.player == "x") {
-                        playerToSwitchTo = "o";
-                    }
-                    this.setState({player: playerToSwitchTo});
-                }
-            }, "switch player")
+            }, "back")
 
         );
     }
@@ -89,10 +65,12 @@ class Game extends React.Component {
         .done(response => {
             $("#spinner").hide();
             let gameState = response.results[0];
+            
             this.setState({
                 board: gameState.board,
                 playerx: gameState.playerx,
-                playero: gameState.playero
+                playero: gameState.playero,
+                turn: gameState.turn
             });
         })
         .fail(error => console.error(error));
@@ -110,7 +88,8 @@ class Game extends React.Component {
                         pos: {x: x, y: y},
                         gameState: this.state,
                         gameID: this.props.gameID,
-                        setTiles: tiles => this.setState({tiles: tiles})
+                        setTiles: tiles => this.setState({tiles: tiles}),
+                        disableClick: () => {this.setState({disableClick: true})}
                     })
                 );
             }
@@ -131,6 +110,14 @@ class Game extends React.Component {
         return size;
     }
 
+    turnMessage() {
+        if (this.state.turn == this.state.player) {
+            return e("div", null, "Your turn");
+        } else {
+            return e("div", null, e("b", null, this.state.turn), "'s turn");
+        }
+    }
+
     pollServer() {
         loopAction = () => {
             $.ajax({
@@ -146,7 +133,9 @@ class Game extends React.Component {
                 this.setState({
                     board: gameState.board,
                     playerx: gameState.playerx,
-                    playero: gameState.playero
+                    playero: gameState.playero,
+                    turn: gameState.turn,
+                    disableClick: false
                 });
                 loop();
             })

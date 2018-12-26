@@ -1,33 +1,29 @@
 class Tile extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            newSymbol: null
-        }
     }
 
     render() {
         let symbol = this.getSymbolFromProps();
 
-        if (this.state.newSymbol != null) {
-            symbol = this.state.newSymbol;
-        }
-        
         let className = "tile grid3x3";
-        if (symbol == null) {
+        let click = () => {};
+        if (
+            symbol == null && 
+            this.props.gameState.player == this.props.gameState.turn &&
+            this.props.gameState.disableClick == false
+        ) {
             className += " clickable";
+            click = () => this.handleClick();
         }
         return e("div", {
             className: className,
-            onClick: () => this.handleClick()
+            onClick: () => click()
         }, e("div", null, symbol));
     }
 
     handleClick() {
-        if (this.getSymbolFromProps() != null) {
-            return;
-        }
-        this.setState({newSymbol: this.getPlayer()});
+        this.props.disableClick();
         $("#spinner").show();
         let board = this.getBoard();
         let pos = this.props.pos;
@@ -40,9 +36,6 @@ class Tile extends React.Component {
                 id: this.props.gameID,
                 board: JSON.stringify(board)
             }
-        })
-        .done(() => {
-            $("#spinner").hide();
         })
         .fail(error => console.error(error));
     }
