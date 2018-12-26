@@ -55,7 +55,11 @@ class SelectGroup extends React.Component {
                 onClick: () => {
                     setAppState({screen: "start"})
                 }
-            }, "back")
+            }, "back"),
+            e("i", {
+                className: "material-icons veryLarge clickable",
+                onClick: () => {this.setState({groups: null})}
+            }, "refresh")
         );
     }
     

@@ -38,7 +38,7 @@ class Game extends React.Component {
                     setAppState({screen: "start"});
                     pastPages.pop();
                 }
-            }, "back")
+            }, "exit")
 
         );
     }

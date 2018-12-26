@@ -9,27 +9,49 @@ class SizePicker extends React.Component {
 
     render() {
         return e("div", {className: "animated fadeIn faster"},
-            e("input", {
-                className: "sizePicker",
-                id: "rows",
-                type: "number",
-                min: "3",
-                defaultValue: "3",
-                onChange: () => {
-                    this.setState({y: $("#rows")[0].value});
-                }
-            }),
-            " by ",
-            e("input", {
-                className: "sizePicker",
-                id: "cols",
-                type: "number",
-                min: "3",
-                defaultValue: "3",
-                onChange: () => {
-                    this.setState({x: $("#cols")[0].value})
-                }
-            }),
+            e("div", {className: "grid3x3"},
+                e("div", {className: "a4 grid3x3"},
+                    e("div", {
+                        className: "a5 veryLarge",
+                        id: "rows"
+                    }, this.state.y),
+                    e("i", {
+                        className: "material-icons clickable a2",
+                        onClick: () => {
+                            if (this.state.y >= 10) {return}
+                            this.setState({y: this.state.y + 1});
+                        }
+                    }, "add"),
+                    e("i", {
+                        className: "material-icons clickable a8",
+                        onClick: () => {
+                            if (this.state.y <= 3) {return}
+                            this.setState({y: this.state.y - 1});
+                        }
+                    }, "remove")
+                ),
+                e("div", {className: "a5"}, "X"),
+                e("div", {className: "a6 grid3x3"},
+                    e("div", {
+                        className: "a5 veryLarge",
+                        id: "rows"
+                    }, this.state.x),
+                    e("i", {
+                        className: "material-icons clickable a2",
+                        onClick: () => {
+                            if (this.state.x >= 10) {return}
+                            this.setState({x: this.state.x + 1});
+                        }
+                    }, "add"),
+                    e("i", {
+                        className: "material-icons clickable a8",
+                        onClick: () => {
+                            if (this.state.x <= 3) {return}
+                            this.setState({x: this.state.x - 1});
+                        }
+                    }, "remove")
+                ),
+            ),
             e("br"),
             e("i", {
                 className: "material-icons veryLarge clickable",
@@ -37,7 +59,7 @@ class SizePicker extends React.Component {
                     this.props.setValues({x: this.state.x, y: this.state.y});
                     this.props.handleClick();
                 }
-            }, "check_box")
+            }, "forward")
         );
     }
 }

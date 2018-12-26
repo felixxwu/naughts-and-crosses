@@ -1,9 +1,9 @@
 body {
     font-family: "Montserrat", sans-serif;
     margin: 0;
-    --bg: rgb(245, 245, 245);
-    --black: rgb(57, 85, 85);
-    --hover: rgb(225, 225, 225);
+    --bg: rgb(230, 230, 230);
+    --black: rgb(77, 95, 95);
+    --hover: rgba(0, 0, 0, 0.05);
     background-color: var(--bg);
     overflow-x: hidden;
 }
@@ -11,6 +11,17 @@ body {
 .fullscreen {
     width: 100vw;
     height: 100vh;
+}
+
+.material-icons {
+    color: var(--black);
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
 
 hidden {
