@@ -29,6 +29,8 @@ class Game extends React.Component {
 
             e("div", null, "You are player: ", e("b", null, this.state.player)),
             
+            this.playerOnlineMessage(),
+            
             this.turnMessage(),
 
             e("div", {className: "board"}, this.gameTiles()),
@@ -41,6 +43,22 @@ class Game extends React.Component {
             }, "exit")
 
         );
+    }
+
+    playerOnlineMessage() {
+        let enemyPlayerTimestamp = (() => {
+            if (this.state.player == "x") {
+                return this.state.playero;
+            } else {
+                return this.state.playerx;
+            }
+        })();
+        let cutoff = (new Date()).getTime() - 3000;
+        if (enemyPlayerTimestamp < cutoff) {
+            return e("div", null, "Enemy player ", e("b", null, "offline"));
+        } else {
+            return e("div", null, "Enemy player ", e("b", null, "online"));
+        }
     }
 
     choosePlayer() {
@@ -110,9 +128,9 @@ class Game extends React.Component {
 
     turnMessage() {
         if (this.state.turn == this.state.player) {
-            return e("div", null, "Your turn");
+            return e("b", null, "Your turn");
         } else {
-            return e("div", null, e("b", null, this.state.turn), "'s turn");
+            return e("div", null, e("b", {className: "uppercase"}, this.state.turn), "'s turn");
         }
     }
 

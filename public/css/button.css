@@ -14,5 +14,5 @@ button:hover, .hover:hover {
 .bordered, button {
     border: 1px solid var(--black);
     padding: 15px;
-    border-radius: 2px;
+    border-radius: 3px;
 }

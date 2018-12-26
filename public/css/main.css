@@ -48,6 +48,10 @@ hidden {
     font-size: 40px;
 }
 
+.uppercase {
+    text-transform: uppercase;
+}
+
 .createjoin {
     background-color: transparent;
     display: block;
