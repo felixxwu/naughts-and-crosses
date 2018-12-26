@@ -6,6 +6,7 @@ body {
     --hover: rgba(0, 0, 0, 0.05);
     background-color: var(--bg);
     overflow-x: hidden;
+    color: var(--black);
 
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -35,9 +36,9 @@ hidden {
 }
 
 #logo {
-    width: 80px;
+    width: 50px;
     position: fixed;
-    top: 15%;
+    top: 10%;
     margin: auto;
     left: 50%;
     transform: translateX(-50%);

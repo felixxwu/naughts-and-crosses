@@ -44,6 +44,7 @@ class SelectGroup extends React.Component {
         if (children.length == 0) {
             children = [
                 e("div", {key: "text"}, "There are no games, create one?"),
+                e("br"),
                 e(CreateGroup, {key: "button"})
             ];
         }

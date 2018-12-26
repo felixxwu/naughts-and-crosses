@@ -1,16 +1,18 @@
 button {
     display: block;
-    border: 1px solid var(--black);
-    padding: 15px;
     margin: 20px;
     background-color: transparent;
-    border-radius: 2px;
     text-transform: uppercase;
-    color: var(--black);
     font-weight: bold;
     cursor: pointer;
 }
 
-button:hover {
+button:hover, .hover:hover {
     background-color: var(--hover);
+}
+
+.bordered, button {
+    border: 1px solid var(--black);
+    padding: 15px;
+    border-radius: 2px;
 }
