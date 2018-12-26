@@ -2,7 +2,7 @@ var loopAction = () => loop();
 
 function loop() {
     console.log(loopAction);
-    if (appState() != "game") {
+    if (appState().screen != "game") {
         loopAction = () => loop();
     }
     setTimeout(() => {
