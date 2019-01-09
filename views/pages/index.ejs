@@ -10,15 +10,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/spinner.css">
-    <link rel="stylesheet" href="/css/grid3x3.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/button.css">
-    <link rel="stylesheet" href="/css/game.css">
-    <link rel="stylesheet" href="/animatecss/animate.css">
+    <%- linkAll("public/css", "css") %>
 </head>
 <body >
 
+    
     <center id="loading" class="grid3x3 fullscreen">
         <div id="bottom" class="a8">
             <div id="spinner" class="sk-cube-grid">
@@ -34,31 +30,18 @@
             </div>
         </div>
     </center>
-
+    
     <center class="grid3x3 fullscreen">
         <div id="app"></div>
     </center>
 
-    <!-- JQUERY & FUNCTIONS -->
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/animatecss/jqExtension.js"></script>
-    <script src="/js/onload.js"></script>
-    <script src="/js/location.js"></script>
-    <script src="/js/spinner.js"></script>
-    <script src="/js/back.js"></script>
-    <script src="/js/loop.js"></script>
-
-    <!-- REACT -->
     <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script src="/components/app.js"></script>
-    <script src="/components/start/createGroup.js"></script>
-    <script src="/components/start/joinGroup.js"></script>
-    <script src="/components/start/sizePicker.js"></script>
-    <script src="/components/select/selectGroup.js"></script>
-    <script src="/components/select/groupListing.js"></script>
-    <script src="/components/game/game.js"></script>
-    <script src="/components/game/tile.js"></script>
+
+    <%- linkAll("public/js","js") %>
+    <%- linkAll("public/components","js") %>
 
     <!-- PRELOAD IMAGES HERE -->
     <hidden>

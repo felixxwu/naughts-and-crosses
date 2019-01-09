@@ -1,5 +1,21 @@
-// calls to this must be func: function, arg1: ..., arg2: ...
+// SETUP:
+// inside index.js add: const functions = require('./serverFunctions')
+// also add: .get('/serverFunctions', (req, res) => functions.selectFunction(req, res))
 
+// USAGE:
+// $.ajax({
+//     url: "serverFunctions",
+//     data: {
+//         func: "myFunction",
+//         arg1: value,
+//         arg2: value
+//     }
+// })
+// .done(response => {
+//     results are in response.results
+//     ... do things here ...
+// })
+// .fail(error => console.error(error));
 
 const { Pool } = require('pg');
 const pool = new Pool({
@@ -9,6 +25,7 @@ const pool = new Pool({
 
 var client;
 
+// shorthand helper function to execute sql queries, returns null if query returns no results
 sqlQuery = async (query) => {
     let result = await client.query(query);
     let results = {results: result ? result.rows : null};
@@ -20,9 +37,11 @@ module.exports = {
         try {
             client = await pool.connect()
 
+            // call function based on function name
             let func = new Function('args', `return ${ req.query.func }(args)`);
             let results = await func(req.query);
 
+            // send the results to the output
             res.send(results);
             client.release();
             
