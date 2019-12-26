@@ -30,9 +30,7 @@ class CreateGroup extends React.Component {
         return e('button', {
             id: "createGameButton",
             onClick: () => {
-                $("#createGameButton").animateCss("fadeOut faster",() => {
-                    this.setState({showPicker: true});
-                });
+                this.setState({showPicker: true});
             }
         },
             "create game"
@@ -46,10 +44,7 @@ class CreateGroup extends React.Component {
                 this.createGroup(position.coords);
             },
             error => {      // error
-                $("#app").animateCss("fadeOut faster", () => {
-                    $("#app").animateCss("fadeIn faster");
-                    this.setState({locationError: lookUpLocationError(error)});
-                });
+                this.setState({locationError: lookUpLocationError(error)});
             }
         );
     }

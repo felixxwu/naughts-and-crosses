@@ -87,7 +87,6 @@ class SelectGroup extends React.Component {
         .done(response => {
             this.setState({groups: response.results});
             $("#spinner").hide();
-            $("#app").animateCss("fadeIn faster");
         })
         .fail(error => console.error(error));
     }

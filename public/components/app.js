@@ -12,15 +12,12 @@ class App extends React.Component {
         };
         appState = () => {return this.state};
         setAppState = state => {
-            $("#app").animateCss("fadeOut faster", () => {
-                this.setState(state);
-            });
+            this.setState(state);
         };
     }
 
     render() {
         location.hash = this.state.screen;
-        $("#app").animateCss("fadeIn faster");
         switch (this.state.screen) {
             case "start":
                 return e("div", {className: "createjoin"},
